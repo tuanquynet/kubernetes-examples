@@ -33,9 +33,12 @@ minikube start --driver=docker
 
 ## add repo for jenkins
 helm repo add jenkins https://charts.jenkins.io
+helm repo update
 ## install helm jenkins chart
 helm install my-jenkins jenkins/jenkins
-## start jenkins service
+# Wait for around 1 minute
+sleep 60
+## start tunnel for jenkins service
 minikube service my-jenkins
 ## print out admin's password in jenkins
 kubectl exec --namespace default -it svc/my-jenkins -c jenkins -- /bin/cat /run/secrets/chart-admin-password && echo
