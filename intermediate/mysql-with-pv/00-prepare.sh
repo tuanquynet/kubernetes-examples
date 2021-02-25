@@ -2,4 +2,4 @@
 minikube ssh
 # then inside minikube environment
 sudo mkdir /mnt/data
-sudo mkdir /mnt/data/mongodb
+sudo mkdir /mnt/data/mysql
