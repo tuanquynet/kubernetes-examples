@@ -1,0 +1,35 @@
+# https://hub.docker.com/r/duluca/minimal-node-web-server
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-web-server
+  labels:
+    app: node-web-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-web-server
+  template:
+    metadata:
+      labels:
+        app: node-web-server
+    spec:
+      containers:
+      - name: node-web-server-container
+        image: duluca/minimal-node-web-server
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-web-server
+spec:
+  selector:
+    app: node-web-server
+  ports:
+    - protocol: TCP
+      port: 3000
+      # container port
+      targetPort: 3000
