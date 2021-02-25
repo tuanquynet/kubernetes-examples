@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: wordpress
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: wpmysql
+          image: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysqlrootpass
+                  key: password
+            - name: MYSQL_DATABASE
+              value: wordpress
+          volumeMounts:
+            - mountPath: "/var/lib/mysql"
+              name: mysqlpvc
+      volumes:
+        - name: mysqlpvc
+          persistentVolumeClaim:
+            claimName: mysqlpvc
