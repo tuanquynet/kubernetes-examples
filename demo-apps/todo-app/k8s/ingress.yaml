@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: todo-app-ingress
+  namespace: todo-app
+spec:
+  # defaultBackend:
+  #   service:
+  #     name: node-web-server
+  #     port:
+  #       number: 3000
+  rules:
+  - host: app.todo.local
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: webapp
+            port:
+              number: 8080
+  - host: api.todo.local
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: api
+            port:
+              number: 3001

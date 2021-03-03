@@ -19,10 +19,23 @@ app.use(cors());
 //const MONGO_URI = 'mongodb://localhost:27017/todo';
 // const MONGO_URI = 'mongodb+srv://devops:share123@cluster0-5kuqc.mongodb.net/todo?retryWrites=true';
 const {
-    MONGO_URI = 'mongodb://localhost:27017/todo'
+    // MONGO_URI = 'mongodb://localhost:27017/todo'
+    MONGO_HOST = 'localhost',
+    MONGO_PORT = '27017',
+    MONGO_DATABASE = 'todo',
+    MONGO_USER = '',
+    MONGO_PASSWORD = '',
 } = process.env;
 
-mongoose.connect(MONGO_URI, { useNewUrlParser: true }, () => {
+const MONGO_URI = MONGO_PASSWORD
+    ? `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/${MONGO_DATABASE}?authSource=admin`
+    : `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DATABASE}?authSource=admin`;
+
+mongoose.connect(MONGO_URI, { useNewUrlParser: true }, (error) => {
+    if (error) {
+        console.error(error)
+        return
+    }
     console.log('Connect to MongoDB @', MONGO_URI, ' successfully.');
 });
 
@@ -37,6 +50,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/server-info', (req, res) => {
+    res.json({
+        pid: process.pid,
+        date: new Date(),
+    })
+});
 app.use('/users', usersRouter);
 app.use('/tasks', tasksRouter);
 

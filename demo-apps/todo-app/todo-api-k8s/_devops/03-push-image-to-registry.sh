@@ -1,0 +1,1 @@
+docker image push --all-tags localhost:5000/todo-app-api
