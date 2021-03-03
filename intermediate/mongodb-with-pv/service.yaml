@@ -9,5 +9,5 @@ spec:
     app: mongodb
   ports:
   - protocol: TCP
-    port: 3306
-    targetPort: 3306
+    port: 27017
+    targetPort: 27017
