@@ -102,3 +102,5 @@ dist
 
 # TernJS port file
 .tern-port
+demo-apps/todo-app/todo-webapp-k8s/todo-webapp/build/precache-manifest.fbc5807283a08e9eb197983826409bb1.js
+demo-apps/todo-app/todo-webapp-k8s/todo-webapp/build/*
