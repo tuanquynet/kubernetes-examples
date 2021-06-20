@@ -23,3 +23,6 @@ kubectl delete crd thanosrulers.monitoring.coreos.com
 ### View grafana
 - forward port to grafana container (pod): `kubectl port-forward deployment.apps/prometheus-stack-grafana 3000`
 - open on browser: http://localhost:3000
+#### View mongodb monitoring
+- open on browser: http://localhost:3000
+- Go to Manage > Kubernetes / Compute Resources / Pod
