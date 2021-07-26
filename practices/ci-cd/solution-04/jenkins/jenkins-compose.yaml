@@ -1,0 +1,29 @@
+version: '3.5'
+
+networks:
+  jenkins:
+    name: jenkins
+
+services:
+
+  jenkins:
+    user: root
+    # image: jenkins/jenkins:2.249.3    
+    image: jenkins/jenkins:2.289.2
+    
+    networks:
+      - jenkins
+    ports:
+      - '8080:8080'
+      - '50000:50000'
+    volumes:
+      - /Users/quytran/jenkins_home/:/var/lib/jenkins
+      # - /var/run/docker.sock:/var/run/docker.sock
+      # - /Users/quytran/.docker/run/docker.sock:/var/run/docker.sock
+      # - /Applications/Docker.app/Contents/Resources/bin/docker:/usr/bin/docker
+      # - /usr/local/bin/docker:/usr/bin/docker
+      # - /usr/lib/x86_64-linux-gnu/libltdl.so.7:/usr/lib/x86_64-linux-gnu/libltdl.so.7
+    environment:
+      - JENKINS_HOME=/var/lib/jenkins
+    # logging:
+    #   driver: "journald"
