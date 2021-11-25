@@ -24,7 +24,7 @@ mkdir -p /Users/quytran/jenkins/jenkins_home
 
 # setup jenkins docker for did
 docker run --name jenkins-docker --detach \
-  --privileged --network jenkins --network-alias docker \
+  --privileged --network jenkins --network-alias docker-dind \
   --env DOCKER_TLS_CERTDIR=/certs \
   --volume jenkins-docker-certs:/certs/client \
   --volume /Users/quytran/jenkins/jenkins_home:/var/jenkins_home \

@@ -2,7 +2,7 @@
 // - jenkins slave already have docker 
 // - jenkins agent will reuse docker.sock, docker cli from the slave
 // - git repo : https://github.com/tuanquynet/playjenkins
-// plugin: aws steps
+// plugin: aws steps require 2.60.3
 pipeline {
     agent any
     stages {
